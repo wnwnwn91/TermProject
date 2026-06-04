@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: 2b65a524f88abb74db574ecea36a1064
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 8
+  defaultSettings:
+    serializedVersion: 2
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+    preloadAudioData: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 290631
+  packageName: FREE Classic Chiptune Tracks - lumentone
+  packageVersion: 1.0
+  assetPath: "Assets/lumentone/Classic Chiptune Tracks - lumentone/1. flowers in
+    the garden - \u0391\u03BD\u03C4\u03B9\u03B3\u03C1\u03B1\u03C6\u03AE.wav"
+  uploadId: 800208

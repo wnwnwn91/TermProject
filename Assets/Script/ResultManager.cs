@@ -18,58 +18,77 @@ public class ResultManager : MonoBehaviour
     public TextMeshProUGUI rank2Text; // 2ND: 기록용 텍스트
     public TextMeshProUGUI rank3Text; // 3RD: 기록용 텍스트
 
+    private const float ROUND_LIMIT = 20f; // 각 라운드 제한 시간
+
     void Start()
     {
-        // 1. 이번 판 라운드별 데이터 읽어오기
-        float r1Left = PlayerPrefs.GetFloat("Temp_Round1_LeftTime", 0f);
-        float r2Left = PlayerPrefs.GetFloat("Temp_Round2_LeftTime", 0f);
-        float r3Left = PlayerPrefs.GetFloat("Temp_Round3_LeftTime", 0f);
+        // 1. 이번 판 라운드별 남은 시간 데이터 읽어오기 (기본값은 안 거쳤다는 의미의 -1)
+        float r1Left = PlayerPrefs.GetFloat("Temp_Round1_LeftTime", -1f);
+        float r2Left = PlayerPrefs.GetFloat("Temp_Round2_LeftTime", -1f);
+        float r3Left = PlayerPrefs.GetFloat("Temp_Round3_LeftTime", -1f);
         string resultState = PlayerPrefs.GetString("GameResult", "GAMEOVER");
 
         if (resultTitleText != null) resultTitleText.text = resultState;
 
-        // UI 텍스트 업데이트 (스크린샷 모양에 맞춤)
-        if (r1TimeText != null) r1TimeText.text = "1ROUND: " + r1Left.ToString("F1") + "s";
-        if (r2TimeText != null) r2TimeText.text = "2ROUND: " + r2Left.ToString("F1") + "s";
-        if (r3TimeText != null) r3TimeText.text = "3ROUND: " + r3Left.ToString("F1") + "s";
+        // 2. 각 라운드별 "걸린 시간" 계산 (만약 플레이 안 했거나 시간 초과면 20초 다 쓴 걸로 처리)
+        float r1Used = (r1Left <= -1f || r1Left == 0f) ? ROUND_LIMIT : ROUND_LIMIT - r1Left;
+        float r2Used = (r2Left <= -1f || r2Left == 0f) ? ROUND_LIMIT : ROUND_LIMIT - r2Left;
+        float r3Used = (r3Left <= -1f || r3Left == 0f) ? ROUND_LIMIT : ROUND_LIMIT - r3Left;
 
-        float totalLeftTime = r1Left + r2Left + r3Left;
-        if (totalTimeText != null) totalTimeText.text = "SCORE: " + totalLeftTime.ToString("F1") + "s";
+        // 3. UI 텍스트 업데이트
+        if (r1TimeText != null) r1TimeText.text = "1ROUND: " + r1Used.ToString("F1") + "s";
+        if (r2TimeText != null) r2TimeText.text = "2ROUND: " + r2Used.ToString("F1") + "s";
+        if (r3TimeText != null) r3TimeText.text = "3ROUND: " + r3Used.ToString("F1") + "s";
 
-        // 2. 역대 탑 3 세션 데이터 읽어오기
+        float totalUsedTime = r1Used + r2Used + r3Used;
+        if (totalTimeText != null) totalTimeText.text = "SCORE: " + totalUsedTime.ToString("F1") + "s";
+
+        // 4. 역대 탑 3 세션 데이터 읽어오기
         float rank1 = PlayerPrefs.GetFloat("SessionRank1", 0f);
         float rank2 = PlayerPrefs.GetFloat("SessionRank2", 0f);
         float rank3 = PlayerPrefs.GetFloat("SessionRank3", 0f);
 
-        // 3. 게임을 클리어했을 때만 탑 3 랭킹 갱신 및 정렬
+        // 5. 3라운드까지 완벽하게 "CLEAR" 했을 때만 탑 3 랭킹 갱신
         if (resultState == "CLEAR")
         {
             List<float> scores = new List<float>();
-            scores.Add(rank1);
-            scores.Add(rank2);
-            scores.Add(rank3);
-            scores.Add(totalLeftTime);
 
-            // 내림차순 정렬 (큰 숫자가 앞으로)
-            scores.Sort((a, b) => b.CompareTo(a));
+            if (rank1 > 0f) scores.Add(rank1);
+            if (rank2 > 0f) scores.Add(rank2);
+            if (rank3 > 0f) scores.Add(rank3);
 
-            rank1 = scores[0];
-            rank2 = scores[1];
-            rank3 = scores[2];
+            scores.Add(totalUsedTime);
+            scores.Sort((a, b) => a.CompareTo(b)); // 오름차순 정렬
+
+            rank1 = scores.Count > 0 ? scores[0] : 0f;
+            rank2 = scores.Count > 1 ? scores[1] : 0f;
+            rank3 = scores.Count > 2 ? scores[2] : 0f;
 
             PlayerPrefs.SetFloat("SessionRank1", rank1);
             PlayerPrefs.SetFloat("SessionRank2", rank2);
             PlayerPrefs.SetFloat("SessionRank3", rank3);
+            PlayerPrefs.Save();
         }
 
-        // 4. 탑 3 UI 텍스트에 값 뿌려주기
-        if (rank1Text != null) rank1Text.text = "1ST: " + rank1.ToString("F1") + "s";
-        if (rank2Text != null) rank2Text.text = "2ND: " + rank2.ToString("F1") + "s";
-        if (rank3Text != null) rank3Text.text = "3RD: " + rank3.ToString("F1") + "s";
+        // 6. 탑 3 UI 텍스트 출력
+        if (rank1Text != null) rank1Text.text = "1ST: " + (rank1 > 0f ? rank1.ToString("F1") + "s" : "-");
+        if (rank2Text != null) rank2Text.text = "2ND: " + (rank2 > 0f ? rank2.ToString("F1") + "s" : "-");
+        if (rank3Text != null) rank3Text.text = "3RD: " + (rank3 > 0f ? rank3.ToString("F1") + "s" : "-");
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+    // [추가] 게임 종료를 담당하는 함수
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        // 유니티 에디터에서 테스트 중일 때 켜져있는 재생(Play) 모드를 끕니다.
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // 실제 게임 빌드 파일(.exe)에서는 게임 프로그램 자체를 완전히 종료합니다.
+        Application.Quit();
+#endif
     }
 }

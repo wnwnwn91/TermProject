@@ -312,12 +312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67f2a349684c2b49b81a301d98b63d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_pinkman
-  maxSpeed: 5
-  jumpPower: 8
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  maxJumpCount: 1
+  moveSpeed: 2
+  slipperyFriction: 0.95
+  originalJumpPower: 8
+  originalMaxSpeed: 5
 --- !u!1 &309648394
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +383,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 348c3b734b11d3b4aa5c69e25b7113e6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9490196, g: 1, b: 0.99607843, a: 1}
   m_FlipX: 0
   m_FlipY: 1
   m_DrawMode: 0
@@ -439,8 +437,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1500f0635c16f2f4dacb3a9a62660158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  timeText: {fileID: 758874140}
-  surviveTime: 0
+  currentRoundName: 1ROUND
+  limitTime: 20
+  timerText: {fileID: 0}
+  player: {fileID: 0}
+  isItemActive: 0
+  isPenaltyActive: 0
 --- !u!4 &446306110
 Transform:
   m_ObjectHideFlags: 0
@@ -963,7 +965,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 348c3b734b11d3b4aa5c69e25b7113e6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9490196, g: 1, b: 0.99607843, a: 1}
   m_FlipX: 0
   m_FlipY: 1
   m_DrawMode: 0
@@ -1054,7 +1056,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 348c3b734b11d3b4aa5c69e25b7113e6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9490196, g: 1, b: 0.99607843, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1145,7 +1147,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 348c3b734b11d3b4aa5c69e25b7113e6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.94654083, g: 1, b: 0.9956986, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2881,7 +2883,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.81446534, g: 1, b: 0.9889411, a: 1}
   m_Origin: {x: -9, y: -8, z: 0}
   m_Size: {x: 18, y: 32, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
