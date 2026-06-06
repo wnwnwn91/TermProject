@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;
-    public float followSpeed = 5f;
-    public Vector3 offset = new Vector3(0f, 0f, -10f);
+    [Header("Target & Speed Settings")]
+    public Transform target;          // 추적할 플레이어 
+    public float followSpeed = 5f;    // 카메라 부드러움 속도 
+    public Vector3 offset = new Vector3(0f, 0f, -10f); // 기본 거리 간격
 
-    // 인스펙터창에서 카메라를 처음에 고정시켜둘 X 좌표를 직접 지정할 수도 있습니다.
-    public float fixedXPosition = 0f;
+    [Header("Camera Constraints")]
+    public float fixedXPosition = 0f; // 좌우 고정할 X 좌표 값
 
     void LateUpdate()
     {
         if (target != null)
         {
-            //핵심 수정 부분
-            // X축은 캐릭터의 target.position.x 대신, 내가 고정하고 싶은 fixedXPosition을 넣습니다.
-            // Y축과 Z축만 캐릭터를 부드럽게 추적하도록 셋팅합니다.
-            Vector3 targetPosition = new Vector3(fixedXPosition + offset.x, target.position.y + offset.y, target.position.z + offset.z);
+            // X축은 적어둔 숫자로 칼고정, Y와 Z축만 플레이어의 실시간 위치 따라가기
+            Vector3 targetPosition = new Vector3(
+                fixedXPosition + offset.x,      // X축 고정 알고리즘
+                target.position.y + offset.y,   // Y축 실시간 추적
+                target.position.z + offset.z    // Z축 깊이 유지
+            );
 
-            // 지정된 목표 위치로 부드럽게 이동
+            // 선형보간
             transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
         }
     }

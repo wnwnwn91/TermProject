@@ -5,6 +5,33 @@ TextureImporter:
   - first:
       213: 5996240337325545947
     second: hotpack_0
+  - first:
+      213: -6468948374298591816
+    second: hotpack_1
+  - first:
+      213: -435751158044260664
+    second: hotpack_2
+  - first:
+      213: -8799740102374497139
+    second: hotpack_3
+  - first:
+      213: 9061461285262243271
+    second: hotpack_4
+  - first:
+      213: 7605238245360397455
+    second: hotpack_5
+  - first:
+      213: 2244543911239691574
+    second: hotpack_6
+  - first:
+      213: -265022873388803211
+    second: hotpack_7
+  - first:
+      213: 3235136894633941308
+    second: hotpack_8
+  - first:
+      213: 1160541312711165915
+    second: hotpack_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,10 +130,10 @@ TextureImporter:
       name: hotpack_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 17
-        width: 49
-        height: 31
+        x: 8
+        y: 31
+        width: 112
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -117,6 +144,204 @@ TextureImporter:
       bones: []
       spriteID: bd9582e31dce63350800000000000000
       internalID: 5996240337325545947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_1
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 31
+        width: 110
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bd779f3abda936a0800000000000000
+      internalID: -6468948374298591816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_2
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 31
+        width: 108
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c68e4661a6e3f9f0800000000000000
+      internalID: -435751158044260664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_3
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 31
+        width: 111
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d84653afffa01e580800000000000000
+      internalID: -8799740102374497139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_4
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 31
+        width: 112
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c5b20e7707c0cd70800000000000000
+      internalID: 9061461285262243271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_5
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 31
+        width: 112
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8cebeec3eb3b8960800000000000000
+      internalID: 7605238245360397455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_6
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 31
+        width: 112
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63d25309bc8362f10800000000000000
+      internalID: 2244543911239691574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_7
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 31
+        width: 110
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57b9e4ec913725cf0800000000000000
+      internalID: -265022873388803211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_8
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 31
+        width: 109
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c399a6c7dd385ec20800000000000000
+      internalID: 3235136894633941308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hotpack_9
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 31
+        width: 112
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd78053dc221b1010800000000000000
+      internalID: 1160541312711165915
       vertices: []
       indices: 
       edges: []
@@ -136,6 +361,15 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       hotpack_0: 5996240337325545947
+      hotpack_1: -6468948374298591816
+      hotpack_2: -435751158044260664
+      hotpack_3: -8799740102374497139
+      hotpack_4: 9061461285262243271
+      hotpack_5: 7605238245360397455
+      hotpack_6: 2244543911239691574
+      hotpack_7: -265022873388803211
+      hotpack_8: 3235136894633941308
+      hotpack_9: 1160541312711165915
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
