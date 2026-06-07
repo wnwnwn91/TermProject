@@ -17,7 +17,7 @@ public class ResultManager : MonoBehaviour
     public TextMeshProUGUI rank2Text;      // 2등 
     public TextMeshProUGUI rank3Text;      // 3등 
 
-    private const float ROUND_LIMIT = 20f; // 제한 시간 
+    private const float ROUND_LIMIT = 25f; // 제한 시간 
 
     void Start()
     {

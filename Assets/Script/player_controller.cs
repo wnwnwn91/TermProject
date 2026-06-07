@@ -119,15 +119,23 @@ public class Player_pinkman : MonoBehaviour
     }
 
     // 2라운드 폭염 기믹: 외부에서 점프력을 약화하거나 원래대로 원상복구 시키는 함수
-    public void ReduceJumpPower() { currentJumpPower = originalJumpPower * 0.66f; } // 점프력 감소
-    public void ResetJumpPower() { currentJumpPower = originalJumpPower; }
+    public void ReduceJumpPower() 
+    {   
+        currentJumpPower = originalJumpPower * 0.66f; // 점프력 감소
+        Debug.Log($"폭염 디버프 적용, 점프력이 낮아졌습니다");
+    } 
+    public void ResetJumpPower() 
+    { 
+        currentJumpPower = originalJumpPower;
+        Debug.Log($"폭염 종료, 점프력이 정상 수치로 복구되었습니다.");
+    }
 
     // 3라운드 한파 기믹: 외부에서 추위 상태를 발동시켜 이동 속도를 느리게 만드는 함수
     public void FreezePlayer()
     {
         isFrozen = true;
         moveSpeed = 1f; //1f, 속도 저하
-        Debug.Log("3ROUND, 한파로 인해 속도 저하");
+        Debug.Log("3ROUND 한파 디버프 적용, 플레이어 속도가 저하되었습니다");
     }
 
     // 3라운드 한파 해제 / 핫팩 아이템 버프: 추위 상태를 풀고 속도를 정상으로 복구하는 함수
@@ -135,7 +143,7 @@ public class Player_pinkman : MonoBehaviour
     {
         isFrozen = false;
         moveSpeed = originalMaxSpeed; // 원래 기본 속도(5f)로 원상복구
-        Debug.Log("3ROUND, 속도가 정상으로 복구");
+        Debug.Log("3ROUND 한파 종료, 이동 속도가 정상 수치로 복구되었습니다.");
     }
 
     // 플레이어가 맵에 배치된 특정 트리거 영역에 들어왔을 때 실행되는 통합 충돌 알고리즘
@@ -166,9 +174,9 @@ public class Player_pinkman : MonoBehaviour
         string objName = collision.gameObject.name;
         if (objName.Contains("Ninja") || objName.Contains("Mask") || objName.Contains("Virtual") || collision.CompareTag("NPC"))
         {
-            Debug.Log($"NPC 구출 성공: {objName}");
+            Debug.Log($"{objName} 구출 성공!: {objName}");
 
-            // SoundManager와 연동하여 구출 성공 사운드 팡 터트리기
+            // SoundManager와 연동하여 구출 성공 효과음 재생
             if (SoundManager.instance != null)
             {
                 SoundManager.instance.PlayRescue();

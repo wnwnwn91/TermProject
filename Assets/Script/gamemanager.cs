@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Progress Settings")]
     public string currentRoundName = "1ROUND"; // 현재 플레이 중인 라운드 이름
-    public float limitTime = 20f;              // 라운드 제한 시간
+    public float limitTime = 25f;              // 라운드 제한 시간
 
     [Header("UI Settings")]
     public TextMeshProUGUI timerText;          // TMP UI
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         // 활성화된 유니티 씬의 이름을 자동으로 가져와 라운드로 지정
         currentRoundName = SceneManager.GetActiveScene().name;
         isGameOver = false;
-        limitTime = 20f;
+        limitTime = 25f;
 
         // 1라운드 데이터 초기화
         if (currentRoundName == "1ROUND")
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
             if (itemDurationTimer <= 0) // 아이템 시간이 종료되면
             {
                 isItemActive = false;
-                Debug.Log("버프 효과 종료");
+                Debug.Log("아이템 버프 효과가 종료되었습니다");
 
                 // 아이템이 사라졌을 때, 현재 날씨 상태를 파악하여 플레이어 능력치를 즉시 재조정
                 if (currentRoundName == "1ROUND")
@@ -131,30 +131,36 @@ public class GameManager : MonoBehaviour
         }
         else if (currentRoundName == "2ROUND")
         {
-            // 2라운드: 폭염, 7초 주기로 2초 동안 폭염 주의보 발동 (점프력 감소)
+            // 2라운드: 폭염, 5초 주기로 2초 동안 폭염 주의보 발동 (점프력 감소)
             weatherTimer += Time.deltaTime;
-            if (weatherTimer >= 7f)
+            if (weatherTimer >= 5f)
             {
                 weatherTimer = 0f;
                 isPenaltyActive = true;
                 penaltyDurationTimer = 2f;
 
+                Debug.Log("기상 악화, 2초 동안 폭염 주의보 발동합니다.");
+
                 // 얼음 아이템으로 방어 중이 아닐 때만 플레이어에게 하향 버프 부여
                 if (!isItemActive) player.ReduceJumpPower();
+                else Debug.Log("플레이어가 얼음 아이템 버프 상태이므로 폭염 페널티를 무시합니다.");
             }
         }
         else if (currentRoundName == "3ROUND")
         {
-            // 3라운드: 한파, 6초 주기로 1초 동안 한파 몰아침 (이동 속도 저하)
+            // 3라운드: 한파, 5초 주기로 2초 동안 한파 몰아침 (이동 속도 저하)
             weatherTimer += Time.deltaTime;
-            if (weatherTimer >= 6f)
+            if (weatherTimer >= 5f)
             {
                 weatherTimer = 0f;
                 isPenaltyActive = true;
-                penaltyDurationTimer = 1f;
+                penaltyDurationTimer = 2f;
+
+                Debug.Log("기상 악화, 2초 동안 한파 경보 발동합니다.");
 
                 // 핫팩 아이템으로 방어 중이 아닐 때만 속도 저하 적용
                 if (!isItemActive) player.FreezePlayer();
+                else Debug.Log("플레이어가 핫팩 아이템 버프 상태이므로 한파 페널티를 무시합니다.");
             }
         }
     }
@@ -167,16 +173,19 @@ public class GameManager : MonoBehaviour
         if (round == "1ROUND")
         {
             itemDurationTimer = 3f; // 우산 방어 3초
+            Debug.Log($"1ROUND 우산 획득, 3초 동안 빗길 미끄러짐 방지 버프가 발동됩니다."); 
             if (player != null) player.ApplySlipperyPhysics(false); // 미끄러짐 즉시 면제
         }
         else if (round == "2ROUND")
         {
-            itemDurationTimer = 6f; // 얼음 방어 6초
+            itemDurationTimer = 4f; // 얼음 방어 4초
+            Debug.Log($"2ROUND 얼음 획득, 4초 동안 폭염 면역 및 점프력 저하 방지 버프가 발동됩니다.");
             if (player != null) player.ResetJumpPower();            // 깎였던 점프력 즉시 복구
         }
         else if (round == "3ROUND")
         {
-            itemDurationTimer = 5f; // 핫팩 방어 5초
+            itemDurationTimer = 4f; // 핫팩 방어 4초
+            Debug.Log($"3ROUND 핫팩 획득, 4초 동안 한파 면역 및 이동 속도 저하 방지 버프가 발동됩니다.");
             if (player != null) player.UnfreezePlayer();            // 얼었던 몸 즉시 녹임 (속도 복구)
         }
     }
